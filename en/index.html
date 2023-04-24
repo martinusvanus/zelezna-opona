@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-R3ZCQ0209K"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-R3ZCQ0209K');
+        </script>
+
+        <meta charset="UTF-8">
+        <title>Deaths at the Czechoslovak Border</title>
+        <meta name="description" content="">
+        <meta name="author" content="Martin Váňa">
+        <meta name="author" content="Jiří Maha">
+        <link rel="icon" type="image/png" href="favicon.png" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <!--Font karmina-sans-->
+        <link rel="stylesheet" href="https://use.typekit.net/gkp6ibr.css">
+
+        <!--Leaflet-->
+        <link rel="stylesheet" href="css/leaflet.css">
+        <script src="js/leaflet.js"></script>
+
+        <!--Marker Cluster-->
+        <link rel="stylesheet" href="css/MarkerCluster.css">
+        <link rel="stylesheet" href="css/MarkerCluster.Default.css">
+        <script src="js/leaflet.markercluster.js"></script>
+
+        <!--defaultextent-->
+        <link rel="stylesheet" href="css/leaflet.defaultextent.css">
+        <script src="js/leaflet.defaultextent.js"></script>
+
+        <!--FontAwesome-->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.typekit.net/zty1fwz.css">
+
+        <!--JQuery-->
+        <script src="js/jquery-3.4.1.min.js"></script>
+
+        <!--JQuery UI-->
+        <script src="js/jquery-ui.js"></script>
+        <link rel="stylesheet" href="css/jquery-ui.css">
+        <script src="js/jquery.ui.touch-punch.min.js"></script>
+        
+        <script src="js/typeset.js"></script>
+        <link rel="stylesheet" href="css/znacky.css">
+        <link rel="stylesheet" href="css/main.css">
+
+    </head>
+
+    <body>      
+        <div id="napovedamenu">
+            <img src="img/menu.png" id="napovedaicon">            
+            <a href="../index.html"><span class="napovedaitem">czech</span></a>
+            <a href="../de/index.html"><span class="napovedaitem">deutsch</span></a>
+            <span class="napovedaitem" id="napovedabutton" style="margin-right: 0;">instructions</span>
+        </div>
+
+        <section class="hornimenu">
+            <div class="hornimenuitem hornimenuitemactive" style="border: none; width: 20%;" value="0">
+                <hr class="pomlcka pomlckaprvni">All periods<hr class="pomlcka pomlckaprvni">
+            </div><!--
+            --><div class="hornimenuitem" value="1">
+                1948 <hr class="pomlcka"> 1950
+                <div class="hornimenutip">From the communist coup until the creation of the Border Guard.</div>
+            </div><!--
+            --><div class="hornimenuitem" value="2">
+                1951 <hr class="pomlcka"> 1965
+                <div class="hornimenutip">From the creation of the Border Guard until the detachment of the high voltage lines and the tranfer of the BG to the Ministry of National Defense.</div>
+            </div><!--
+            --><div class="hornimenuitem" value="3">
+                1966 <hr class="pomlcka"> 1971
+                <div class="hornimenutip">From the detachment of the high voltage lines until the placement of the Border Guard into the Federal Ministry of the Interior.</div>
+            </div><!--
+            --><div class="hornimenuitem" value="4">
+                1972 <hr class="pomlcka"> 1989
+                <div class="hornimenutip">From the placement of the Border Guard under the Federal Ministry of the Interior until the fall of the communist regime.</div>
+            </div>
+        </section>
+
+        <div class="bocnimenu">
+            <div id="bocnimenutop">Additional filters</div>
+            <div class="bocnimenucontent">
+                <h3 style="margin-bottom: 15px;">Age</h3>
+                <div id="slider-vek"></div>
+                <p>
+                    <input type="text" id="vekOd" readonly style="width: 80px; text-align: center; float: left">
+                    <input type="text" id="vekDo" readonly style="width: 80px; text-align: center; float: right">
+                </p>
+
+                <hr style="margin-top:50px">
+                <h3>Gender</h3>
+                <div class="tlacitko"><button type="button" id="muzi" class="aktivni"></button><div class="tlacitkolabel">M</div></div>
+                <div class="tlacitko"><button type="button" id="zeny" class="aktivni"></button><div class="tlacitkolabel">F</div></div>
+                <div class="tlacitko"><button type="button" id="neurcenepohlavy" class="aktivni"></button><div class="tlacitkolabel">undetermined</div></div>
+
+                <hr>
+                <h3>Citizenship</h3>
+                <select id="statniprislusnost">
+                    <option value="12">all citizenships</option>
+                    <option value="1">Czechoslovakia (ČSR, ČSSR)</option>
+                    <option value="2">Poland</option>
+                    <option value="3">Hungary</option>
+                    <option value="4">Austria</option>
+                    <option value="5">Germany (before 1949)</option>
+                    <option value="6">GDR</option>
+                    <option value="7">FRG</option>
+                    <option value="8">none</option>
+                    <option value="9">Jugoslavia</option>
+                    <option value="10">The USSR</option>
+                    <option value="11">France</option>
+                    <option value="0">undetermined</option>
+                </select>
+
+                <hr>
+                <h3>Home district</h3>
+                <select id="okresbydliste">
+                    <option value="97">all home districts</option>
+                    <option value="1">Allier (F)</option>
+                    <option value="2">Arnsberg (SRN)</option>
+                    <option value="3">Benešov</option>
+                    <option value="4">Berlin (NDR)</option>
+                    <option value="5">Beroun</option>
+                    <option value="6">Bratislava</option>
+                    <option value="7">Břeclav</option>
+                    <option value="8">Brno-město</option>
+                    <option value="9">Brno-venkov</option>
+                    <option value="10">Bruntál</option>
+                    <option value="11">Budapest</option>
+                    <option value="12">Budapest (H)</option>
+                    <option value="13">Bytom</option>
+                    <option value="14">Bytom (PL)</option>
+                    <option value="15">České Budějovice</option>
+                    <option value="16">Český Krumlov</option>
+                    <option value="17">Cheb</option>
+                    <option value="18">Chemnitz</option>
+                    <option value="19">Chomutov</option>
+                    <option value="20">Darmstadt (SRN)</option>
+                    <option value="21">Děčín</option>
+                    <option value="22">Domažlice</option>
+                    <option value="23">Dresden (NDR)</option>
+                    <option value="24">Esztergomi (H)</option>
+                    <option value="25">Frankfurt (Oder; NDR)</option>
+                    <option value="26">Frýdek-Místek</option>
+                    <option value="27">Gdańsk (PL)</option>
+                    <option value="28">Gliwicki District (PL)</option>
+                    <option value="29">Hlavní město Praha</option>
+                    <option value="30">Jablonec nad Nisou</option>
+                    <option value="31">Jindřichův Hradec</option>
+                    <option value="32">Karlovy Vary</option>
+                    <option value="33">Karviná</option>
+                    <option value="34">Kassel (SRN)</option>
+                    <option value="35">Katowice (PL)</option>
+                    <option value="36">Kežmarok</option>
+                    <option value="37">Kladno</option>
+                    <option value="38">Klatovy</option>
+                    <option value="39">Kolín</option>
+                    <option value="40">Kroměříž</option>
+                    <option value="41">Leipzig</option>
+                    <option value="42">Levoča</option>
+                    <option value="43">Liberec</option>
+                    <option value="44">Linz</option>
+                    <option value="45">Litoměřice</option>
+                    <option value="46">Louny</option>
+                    <option value="47">Magdeburg (NDR)</option>
+                    <option value="48">Malacky</option>
+                    <option value="49">Mělník</option>
+                    <option value="50">Mistelbach (A)</option>
+                    <option value="51">Mittelfranken (SRN)</option>
+                    <option value="52">Mladá Boleslav</option>
+                    <option value="53">Most</option>
+                    <option value="54">Nagykátai (H)</option>
+                    <option value="55">Niederbayern (SRN)</option>
+                    <option value="56">Nitra</option>
+                    <option value="57">Nové Mesto nad Váhom</option>
+                    <option value="58">Nové Zámky</option>
+                    <option value="59">Nový Jičín</option>
+                    <option value="60">Nymburk</option>
+                    <option value="61">Oberbayern (SRN)</option>
+                    <option value="62">Oberfranken (SRN)</option>
+                    <option value="63">Oberpfalz (SRN)</option>
+                    <option value="64">Okres wałbrzyski (PL)</option>
+                    <option value="65">Olomouc</option>
+                    <option value="66">Opole (PL)</option>
+                    <option value="67">Ostrava-město</option>
+                    <option value="68">Písek</option>
+                    <option value="69">Plzeň-jih</option>
+                    <option value="70">Plzeň-město</option>
+                    <option value="71">Powiat radomski (PL)</option>
+                    <option value="72">Poznań (PL)</option>
+                    <option value="73">Prachatice</option>
+                    <option value="74">Praha-východ</option>
+                    <option value="75">Přerov</option>
+                    <option value="76">Rokycany</option>
+                    <option value="77">Senica</option>
+                    <option value="78">Skalica</option>
+                    <option value="79">Sokolov</option>
+                    <option value="80">Stará Ľubovňa</option>
+                    <option value="81">Süd (SRN)</option>
+                    <option value="82">Šumperk</option>
+                    <option value="83">Świdnica (PL)</option>
+                    <option value="84">Tachov</option>
+                    <option value="85">Trnava</option>
+                    <option value="86">Trutnov</option>
+                    <option value="87">Ústí nad Labem</option>
+                    <option value="88">Veľký Krtíš</option>
+                    <option value="89">Vsetín</option>
+                    <option value="90">Vyškov</option>
+                    <option value="91">Waidhofen an der Thaya (A)</option>
+                    <option value="92">Wien (A)</option>
+                    <option value="93">Žďár nad Sázavou</option>
+                    <option value="94">Žiar nad Hronom</option>
+                    <option value="95">Zlín</option>
+                    <option value="96">Znojmo</option>
+                    <option value="0">undetermined</option>
+                </select>
+
+                <hr>
+                <h3>Unit of Incident</h3>
+                <select id="utvar">
+                    <option value="12">all units of the border guard</option>
+                    <option value="1">10th Volary Border Guard brigade</option>
+                    <option value="2">11th Bratislava Border Guard brigade</option>
+                    <option value="3">12th Planá Border Guard brigade</option>
+                    <option value="4">15th České Budějovice Border Guard brigade</option>
+                    <option value="5">19th Děčín Border Guard brigade</option>
+                    <option value="6">3rd Karlovy Vary Border Guard brigade</option>
+                    <option value="7">4th Znojmo Border Guard brigade</option>
+                    <option value="8">5th Cheb Border Guard brigade</option>
+                    <option value="9">7th Sušice Border Guard brigade</option>
+                    <option value="10">9th Domažlice Border Guard brigade</option>
+                    <option value="11">9th Poběžovice Border Guard brigade</option>
+                    <option value="0">undetermined</option>
+                </select>
+
+                <hr>
+                <h3>Cause of Death</h3>
+                <select id="pricinaumrti">
+                    <option value="10">all causes of death</option>
+                    <option value="0">electric current (in the border barrier)</option>
+                    <option value="1">gun-shot wound</option>
+                    <option value="2">injury caused by an airplane crash</option>
+                    <option value="3">suicide</option>
+                    <option value="4">injury caused by a car crash</option>
+                    <option value="5">drowning</option>
+                    <option value="6">drowning after a gun-shot wound</option>
+                    <option value="7">injury caused by anti-personnel mine</option>
+                    <option value="8">injury caused by Border Guard dogs</option>
+                    <option value="9">other</option>
+                </select>
+
+                <hr>
+                <h3>Direction of Crossing</h3>
+                <div class="tlacitko"><button type="button" id="ven" class="aktivni"></button><div class="tlacitkolabel">out</div></div>
+                <div class="tlacitko"><button type="button" id="dovnitr" class="aktivni"></button><div class="tlacitkolabel">in</div></div>
+                <div class="tlacitko"><button type="button" id="neurcenysmer" class="aktivni"></button><div class="tlacitkolabel">undetermined</div></div>
+                
+                <hr>
+
+                <div id="reset"><i class="fa fa-redo" style="margin-right:10px"></i>Reset filters</div>   
+            </div>
+            <div id="bocnimenubottom"><span class="sipka">^</span><br>Hide</div>
+        </div>
+
+        <div id="pocet-obeti"></div>
+
+        <div id="mapa"></div>
+
+        <div id="popup">
+            <div class="popuptitle">Information about the selected individual<span id="zavripopup">X</span></div>
+            <div id="popupcontent">
+                <!--<dl>
+                    <dt>Jméno osoby</dt>
+                    <dd id="info">Josef K.</dd>
+                    <dt>Státní příslušnost</dt>
+                    <dd>Československo - ČSR, ČSSR</dd>
+                    <dt>Rok incidentu</dt>
+                    <dd>1956</dd>
+                    <dt>Odpovědný útvar</dt>
+                    <dd>9. poběžovická bps</dd>
+                </dl>
+                <dl style="margin-left: 15px;">
+                    <dt>Věk</dt>
+                    <dd>21</dd>
+                    <dt>Okres bydliště</dt>
+                    <dd>Břeclav</dd>
+                    <dt>Směr přechodu</dt>
+                    <dd>do západních zón Německa</dd>
+                    <dt>do SRN</dt>
+                    <dd>Způsob úmrtí</dd>
+                </dl>-->             
+            </div>
+
+        </div>
+
+        <div id="napoveda">
+            <!--<a id="priloha" href="//www.zelezna-opona.cz/" target="_blank">
+                <section>
+                    Tato interaktivní mapová aplikace vznikla k&nbsp;příležitosti vydání knihy <span class="caps">Železná opona v&nbsp;Československu. Usmrcení na&nbsp;československých státních hranicích v&nbsp;letech 1948–1989</span>.
+                </section>
+            </a>-->
+            <section class="welcome">
+                <div id="welcomecontainer">
+                    <div class="title">
+                        <h1 class="">
+                            Deaths at the Czechoslovak Border
+                        </h1>
+                        <a class="toApp hide-for-small napovedabutton1">To Map</a>
+                    </div>
+                    <article>
+                        <p>At least 266 people lost their lives on the Czechoslovak border during the period of the communist regime between 1948 and 1989, and it's evident that their deaths were not accidental. This application shares the results of a project, Documenting Those Killed On The Czechoslovak Border 1948-89, which looks into the fates of these people. Based on detailed mapping of individual cases, you can choose your own perspective and thus assemble a story of this tragically deceased group. </p>
+                        <p>If you have any questions, email <a href="mailto:zeleznaopona@ustrcr.cz">zeleznaopona@ustrcr.cz</a>.</p>
+                    </article>
+                </div>
+            </section>
+            <section class="guide">
+                <h6>Instructions for use</h6>
+                <div class="guide-images" id="overall-guide">
+                    <img src="img/navod.jpg" alt="Obecný popis aplikace">
+                </div>
+                <div class="guide-images" id="marker">
+                    <img src="img/marker.jpg" alt="Popis interakce s bodem na mapě">
+                </div>
+                <br>
+                <div class="text-center">
+                    
+                    <a class="toApp napovedabutton1">To Map</a>
+                </div>
+            </section>
+        </div>
+
+        <script src="js/data.js"></script>
+        <script src="js/kalendar.js"></script>
+        <script src="js/main.js"></script>
+
+    </body>
+</html>

@@ -1,0 +1,27 @@
+/*znacky klasteru*/
+.marker-cluster-small {
+	background-color: rgba(181, 226, 140, 0.6);
+}
+
+.marker-cluster-small div {
+    background-color: rgb(255, 0, 0, 0.4);
+    border: 1px solid rgb(0, 0, 0, 0.6);
+    color: black;
+    font-family: karmina-sans, sans-serif; 
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px !important;
+}
+
+.marker-cluster div {
+    width: 23px;
+    height: 23px;
+}
+
+.marker-cluster-small {
+    background-color: transparent;
+}
+
+.marker-cluster span {
+    line-height: 22px;
+}
