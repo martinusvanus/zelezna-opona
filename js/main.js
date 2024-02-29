@@ -1,13 +1,9 @@
 var mymap = L.map('mapa', {zoomControl: false}).setView([49.4415564, 15.8721311], 7); 
             
 //vytvoří skupinu s basemapou
-var basemapa = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-    attribution: 'Podkladová mapa &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>, © <a href="https://www.mapbox.com/">Mapbox</a> | Data <a href="https://www.ustrcr.cz/">ÚSTR</a>',
-    tileSize: 512,
-    maxZoom: 18,
-    zoomOffset: -1,
-    id: 'mapbox/outdoors-v11',
-    accessToken: 'pk.eyJ1IjoibWFydGludXN2YW51cyIsImEiOiJjaWs4aDFzbDcwMDFqdzNrb3plNHJoZ3F2In0.yPRyLafZLoDiq_jV4lM-cg'
+var basemapa = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: 'Podkladová mapa &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> | Data <a href="https://www.ustrcr.cz/">ÚSTR</a>',
+    maxZoom: 18
 });
 var basemapaGroup = L.layerGroup([basemapa]);
 basemapaGroup.addTo(mymap);

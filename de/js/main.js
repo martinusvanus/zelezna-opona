@@ -1,13 +1,9 @@
 var mymap = L.map('mapa', {zoomControl: false}).setView([49.4415564, 15.8721311], 7); 
             
 //vytvoří skupinu s basemapou
-var basemapa = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-    attribution: 'Podkladová mapa &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>, © <a href="https://www.mapbox.com/">Mapbox</a> | Data <a href="https://www.ustrcr.cz/">ÚSTR</a>',
-    tileSize: 512,
-    maxZoom: 18,
-    zoomOffset: -1,
-    id: 'mapbox/outdoors-v11',
-    accessToken: 'pk.eyJ1IjoibWFydGludmFuYXVzdHIiLCJhIjoiY2swcWF6MzdxMDY4ZjNnbnlzd3RtdWpzcCJ9.QPWzv2XvQC8G8OUa9WtzYQ'
+var basemapa = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: 'Basiskarte &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> | Data <a href="https://www.ustrcr.cz/">ÚSTR</a>',
+    maxZoom: 18
 });
 var basemapaGroup = L.layerGroup([basemapa]);
 basemapaGroup.addTo(mymap);
@@ -310,9 +306,9 @@ var filterObeti = function (){
 
     //upraví počet obětí
     if (obeti.length == 0 || obeti.length >= 2) {
-        document.getElementById("pocet-obeti").innerHTML = obeti.length + " Getöteten";
-    } if (obeti.length == 1) {
         document.getElementById("pocet-obeti").innerHTML = obeti.length + " Getötete";
+    } if (obeti.length == 1) {
+        document.getElementById("pocet-obeti").innerHTML = obeti.length + " Getöteter";
     }
 
     //vypne popup
@@ -343,12 +339,12 @@ $("#slider-vek").slider({
         if(ui.values[ 0 ] == 0) {
             $("#vekOd").val("unbestimmt"); 
         } else {
-            $("#vekOd").val("ab " + ui.values[ 0 ] + " Jahren");
+            $("#vekOd").val("ab " + ui.values[ 0 ] + " Jahre");
         };
         if(ui.values[ 1 ] == 0) {
             $("#vekDo").val("unbestimmt"); 
         } else {
-            $("#vekDo").val("bis " + ui.values[ 1 ] + " Jahren");
+            $("#vekDo").val("bis " + ui.values[ 1 ] + " Jahre");
         };   
     },
     change: function(event, ui) {
@@ -358,7 +354,7 @@ $("#slider-vek").slider({
     }
 });
 $("#vekOd").val("unbestimmt");
-$("#vekDo").val("bis " + $("#slider-vek").slider("values", 1) + " Jahren");
+$("#vekDo").val("bis " + $("#slider-vek").slider("values", 1) + " Jahre");
 
 $("#muzi").click(function(){
     if (muziValue == 1) {
@@ -441,9 +437,9 @@ $("#neurcenysmer").click(function(){
 });
 
 if (obeti.length == 0 || obeti.length >= 2) {
-    document.getElementById("pocet-obeti").innerHTML = obeti.length + " Getöteten";
-} if (obeti.length == 1) {
     document.getElementById("pocet-obeti").innerHTML = obeti.length + " Getötete";
+} if (obeti.length == 1) {
+    document.getElementById("pocet-obeti").innerHTML = obeti.length + " Getöteter";
 }
 
 
@@ -477,7 +473,7 @@ $("#reset").click(function(){
     $("#dovnitr").addClass("aktivni");
     $("#neurcenysmer").addClass("aktivni");
     $("#vekOd").val("unbestimmt");
-    $("#vekDo").val("bis " + $("#slider-vek").slider("values", 1) + " Jahren");
+    $("#vekDo").val("bis " + $("#slider-vek").slider("values", 1) + " Jahre");
 });
 
 /*napoveda horni menu*/
